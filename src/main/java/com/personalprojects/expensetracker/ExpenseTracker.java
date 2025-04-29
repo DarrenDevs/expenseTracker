@@ -143,13 +143,35 @@ public class ExpenseTracker extends Application {
             try {
                 /*TextFormatter<Double> tf = (TextFormatter<Double>) amtFld.getTextFormatter();
                 double amount = tf.getValue();*/
+                //Make sure name field is not empty
+                if (nameFld.getText().equals("")) {
+                    Alert a = new Alert(Alert.AlertType.ERROR, "Name cannot be Empty!", 
+                            ButtonType.OK);
+                    a.showAndWait();
+                    return;
+                }
+                
                 double amount = currencyFormatter.getValue();
+                //prompt user to confirm if price is $0
+                if (amount == 0.00) {
+                    Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, 
+                            "YOu are about to add an expense with a price of $0. Are you sure?",
+                            ButtonType.OK, ButtonType.CANCEL);
+                    confirm.setHeaderText("CONFIRM $0 price");
+                    confirm.showAndWait();
+                    if (confirm.getResult() == ButtonType.CANCEL) {
+                        return;
+                    }
+                }
+                
                 Expense e = new Expense(
                   catBox.getValue(),
                   nameFld.getText(),
                   amount,
                   datePicker.getValue()
                 );
+                
+                
                 dao.addExpense(e);
                 refreshTable();
                 nameFld.clear();
