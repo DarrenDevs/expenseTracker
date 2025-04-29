@@ -1,0 +1,1 @@
+After completing the RegisResQ app for school, I wanted to attempt to apply what I learned to a personal project. I decided to build a simple expense tracker. I wanted to reinforce my knowledge of interacting with a database through java, as well as try to learn javafx for building a gui rather than java swing.
